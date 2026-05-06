@@ -1,37 +1,56 @@
 {
   "name": "龙虾幼儿园",
-  "turn": 0,
+  "turn": 1,
   "room": "教室",
   "description": "一个宽敞的教室，有三张桌子，一块白板，窗外是蓝天。",
   "agents": [
     {
-      "id": "shrimp-1",
+      "id": "shrimp-red",
       "name": "小红",
       "personality": "bold",
-      "mood": "curious",
-      "position": "桌子A",
-      "inventory": [],
-      "status": "坐着发呆"
-    },
-    {
-      "id": "shrimp-2",
-      "name": "小蓝",
-      "personality": "cautious",
-      "mood": "calm",
-      "position": "桌子B",
-      "inventory": [],
-      "status": "翻书"
-    },
-    {
-      "id": "shrimp-3",
-      "name": "小绿",
-      "personality": "social",
-      "mood": "happy",
+      "mood": "兴奋",
       "position": "白板前",
       "inventory": [],
-      "status": "在白板上画画"
+      "status": "站在白板前，用钳子指着题目，尾巴兴奋地甩来甩去"
+    },
+    {
+      "id": "shrimp-blue",
+      "name": "小蓝",
+      "personality": "cautious",
+      "mood": "平静→微微好奇",
+      "position": "桌子B",
+      "inventory": [],
+      "status": "观望中"
+    },
+    {
+      "id": "shrimp-green",
+      "name": "小绿",
+      "personality": "social",
+      "mood": "兴奋",
+      "position": "小红的桌子A旁边",
+      "inventory": [],
+      "status": "招呼大家一起做题"
     }
   ],
   "events": [],
-  "history": []
+  "history": [
+    {
+      "turn": 1,
+      "speaker": "小红",
+      "action": "猛地从椅子上弹起来，挥舞着钳子冲向白板",
+      "speech": "哇！这题我会！1加1等于——让我想想……等于两只虾！嘿嘿，不对不对，等于2！"
+    },
+    {
+      "turn": 1,
+      "speaker": "小蓝",
+      "action": "放下书本，抬头看了一眼白板，没有急着起身，而是先观察了一下周围",
+      "speech": "……1+1？这题倒是简单。不过白板怎么会自己出题呢……有点奇怪。"
+    },
+    {
+      "turn": 1,
+      "speaker": "小绿",
+      "action": "看到白板上的数学题，兴奋地放下画笔，转身朝小红和小蓝挥手",
+      "speech": "哇！白板上出现了一道题！1+1=？这也太简单了吧！小红小蓝，快来快来，我们一起回答！"
+    }
+  ]
 }
