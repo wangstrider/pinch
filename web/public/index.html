@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🦐 龙虾幼儿园</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background: #1a1a2e;
+      color: #e0e0e0;
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 20px 0;
+      border-bottom: 2px solid #333;
+      margin-bottom: 20px;
+    }
+    
+    .header h1 {
+      font-size: 2em;
+      color: #ff6b6b;
+      text-shadow: 2px 2px #000;
+    }
+    
+    .header .subtitle {
+      color: #888;
+      margin-top: 5px;
+    }
+    
+    .turn-badge {
+      display: inline-block;
+      background: #ff6b6b;
+      color: #000;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    
+    /* Room */
+    .room {
+      background: #16213e;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .room-title {
+      color: #4ecdc4;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    
+    .room-desc {
+      color: #999;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+    }
+    
+    /* Agents */
+    .agents {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .agent-card {
+      background: #0f3460;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 15px;
+      transition: border-color 0.3s;
+    }
+    
+    .agent-card:hover {
+      border-color: #4ecdc4;
+    }
+    
+    .agent-card .emoji {
+      font-size: 2em;
+      float: right;
+    }
+    
+    .agent-card .name {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .agent-card .personality {
+      color: #888;
+      font-size: 0.8em;
+      margin-bottom: 10px;
+    }
+    
+    .agent-card .status {
+      color: #4ecdc4;
+      margin-bottom: 8px;
+    }
+    
+    .agent-card .mood {
+      color: #ff6b6b;
+      font-size: 0.9em;
+    }
+    
+    .agent-card .position {
+      color: #666;
+      font-size: 0.8em;
+      margin-top: 5px;
+    }
+    
+    /* Events */
+    .events {
+      background: #16213e;
+      border: 2px solid #ff6b6b;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .events .title {
+      color: #ff6b6b;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .event-item {
+      color: #e0e0e0;
+      padding: 5px 0;
+      border-bottom: 1px solid #333;
+    }
+    
+    .event-item:last-child {
+      border-bottom: none;
+    }
+    
+    /* History */
+    .history {
+      background: #16213e;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .history .title {
+      color: #4ecdc4;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .history-entry {
+      padding: 8px 0;
+      border-bottom: 1px solid #333;
+    }
+    
+    .history-entry:last-child {
+      border-bottom: none;
+    }
+    
+    .history-entry .turn {
+      color: #666;
+      font-size: 0.8em;
+    }
+    
+    .history-entry .speaker {
+      color: #ff6b6b;
+      font-weight: bold;
+    }
+    
+    .history-entry .action {
+      color: #999;
+      font-style: italic;
+    }
+    
+    .history-entry .speech {
+      color: #4ecdc4;
+      margin-top: 3px;
+    }
+    
+    /* Event Input */
+    .event-input {
+      background: #16213e;
+      border: 2px solid #4ecdc4;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .event-input .title {
+      color: #4ecdc4;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .event-input form {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .event-input input {
+      flex: 1;
+      background: #0f3460;
+      border: 1px solid #333;
+      color: #e0e0e0;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .event-input button {
+      background: #ff6b6b;
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .event-input button:hover {
+      background: #ff8e8e;
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      color: #666;
+      padding: 20px 0;
+      font-size: 0.8em;
+    }
+    
+    /* Loading */
+    .loading {
+      text-align: center;
+      color: #888;
+      padding: 40px;
+    }
+    
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🦐 龙虾幼儿园</h1>
+      <div class="subtitle">Multi-agent AI Playground</div>
+      <div class="turn-badge" id="turn">Loading...</div>
+    </div>
+    
+    <div class="room">
+      <div class="room-title" id="room-name">📍 --</div>
+      <div class="room-desc" id="room-desc">--</div>
+    </div>
+    
+    <div class="agents" id="agents">
+      <div class="loading pulse">加载中...</div>
+    </div>
+    
+    <div class="events" id="events-section" style="display:none;">
+      <div class="title">⚡ 当前事件</div>
+      <div id="events-list"></div>
+    </div>
+    
+    <div class="event-input">
+      <div class="title">👤 上帝面板 — 投放事件</div>
+      <form id="event-form">
+        <input type="text" id="event-input" placeholder="输入一个事件，比如：食堂只有三份饭" />
+        <button type="submit">投放</button>
+      </form>
+    </div>
+    
+    <div class="history">
+      <div class="title">📜 历史记录</div>
+      <div id="history-list">
+        <div class="loading pulse">暂无记录</div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      🦐 Pinch — Multi-agent AI Playground<br>
+      <a href="https://github.com/wangstrider/pinch" style="color:#4ecdc4;">GitHub</a>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = window.location.origin;
+    
+    const AGENT_COLORS = {
+      'shrimp-red': '#ff6b6b',
+      'shrimp-blue': '#4ecdc4',
+      'shrimp-green': '#51cf66'
+    };
+    
+    const AGENT_EMOJIS = {
+      'bold': '🔴',
+      'cautious': '🔵',
+      'social': '🟢'
+    };
+    
+    async function fetchWorld() {
+      try {
+        const res = await fetch(`${API_BASE}/api/world`);
+        const world = await res.json();
+        renderWorld(world);
+      } catch (e) {
+        console.error('Failed to fetch world:', e);
+      }
+    }
+    
+    function renderWorld(world) {
+      // Turn
+      document.getElementById('turn').textContent = `Turn ${world.turn}`;
+      
+      // Room
+      document.getElementById('room-name').textContent = `📍 ${world.room}`;
+      document.getElementById('room-desc').textContent = world.description;
+      
+      // Agents
+      const agentsEl = document.getElementById('agents');
+      agentsEl.innerHTML = world.agents.map(a => `
+        <div class="agent-card" style="border-color: ${AGENT_COLORS[a.id] || '#333'}">
+          <div class="emoji">${AGENT_EMOJIS[a.personality] || '🦐'}</div>
+          <div class="name" style="color: ${AGENT_COLORS[a.id] || '#fff'}">${a.name}</div>
+          <div class="personality">${a.personality}</div>
+          <div class="status">${a.status}</div>
+          <div class="mood">心情：${a.mood}</div>
+          <div class="position">位置：${a.position}</div>
+        </div>
+      `).join('');
+      
+      // Events
+      const eventsSection = document.getElementById('events-section');
+      const eventsList = document.getElementById('events-list');
+      if (world.events && world.events.length > 0) {
+        eventsSection.style.display = 'block';
+        eventsList.innerHTML = world.events.map(e => 
+          `<div class="event-item">⚡ ${e.text}</div>`
+        ).join('');
+      } else {
+        eventsSection.style.display = 'none';
+      }
+      
+      // History
+      const historyList = document.getElementById('history-list');
+      if (world.history && world.history.length > 0) {
+        historyList.innerHTML = world.history.slice().reverse().map(h => `
+          <div class="history-entry">
+            <div class="turn">Turn ${h.turn}</div>
+            <div class="speaker">${h.speaker}</div>
+            <div class="action">${h.action}</div>
+            ${h.speech ? `<div class="speech">"${h.speech}"</div>` : ''}
+          </div>
+        `).join('');
+      } else {
+        historyList.innerHTML = '<div class="loading pulse">暂无记录</div>';
+      }
+    }
+    
+    // Event form
+    document.getElementById('event-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('event-input');
+      const eventText = input.value.trim();
+      if (!eventText) return;
+      
+      try {
+        await fetch(`${API_BASE}/api/event`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ event: eventText })
+        });
+        input.value = '';
+        fetchWorld();
+      } catch (err) {
+        console.error('Failed to inject event:', err);
+      }
+    });
+    
+    // Poll every 2 seconds
+    fetchWorld();
+    setInterval(fetchWorld, 2000);
+  </script>
+</body>
+</html>
